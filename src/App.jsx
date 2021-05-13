@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Loader from './components/Loader';
+import { Pagination } from 'react-bootstrap';
+import Navigation from './components/Navibar';
 
 function App() {
 
@@ -18,7 +20,6 @@ function App() {
         setUsers(json)
       }, 700))
   }
-
 
   const createLikesData = (users) => {
     users.map(user => {
@@ -45,18 +46,21 @@ function App() {
 
   return (
     <div className="App">
+      <Navigation />
+      <div className="table-grid">
       {users ? users.map((user, index) =>
         <div key={user.name} className="users-grid">
           <div>{user.name}</div>
           <div>{user.phone}</div>
           <div>{user.email}</div>
           <div>
-            <button onClick={handleLikes} value={likes[index].id}>
+            <button className = "like-btn" onClick={handleLikes} value={likes[index].id}>
               Like {likes[index].like}
             </button>
           </div>
         </div>
       ) : <Loader />}
+      </div>
       <div className="pagination">
         {[1, 2, 3].map(page => <div className="pagination-item" onClick={() => { setQuery(page) }} key={page}>{page}</div>)}
       </div>
