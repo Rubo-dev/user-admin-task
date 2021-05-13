@@ -39,6 +39,14 @@ function App() {
     })
    return likes
   }
+  const handleDislikes = (e) =>{
+    likes.forEach((dislike) =>{
+      if (+dislike.id === +e.target.value){
+        dislike.dislike++
+      }
+    })
+    return likes;
+  }
 
   useEffect(() => {
     getData()
@@ -56,6 +64,11 @@ function App() {
           <div>
             <button className = "like-btn" onClick={handleLikes} value={likes[index].id}>
               Like {likes[index].like}
+            </button>
+          </div>
+          <div>
+            <button className = "like-btn" onClick = {handleDislikes} value = {likes[index].id}>
+              Dislike {likes[index].dislike}
             </button>
           </div>
         </div>

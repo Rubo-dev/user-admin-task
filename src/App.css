@@ -41,7 +41,7 @@
   background-color:#2d2d2d;
   transition: .3s;
   color: #fff;
-  padding: .3em;
+  padding: .3em .5em;
   border-radius: 15px;
   border: none;
 }
