@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Loader from './components/Loader';
+import { Pagination } from 'react-bootstrap';
+import Navigation from './components/Navigation';
 
 function App() {
 
@@ -11,7 +13,7 @@ function App() {
 
   const getData = () => {
     setUsers(null)
-    fetch(`https://jsonplaceholder.typicode.com/users?_start=${query}&_limit=5`)
+    fetch(`https://jsonplaceholder.typicode.com/users?_start=${query}&_limit=6`)
       .then(response => response.json())
       .then(json => setTimeout(() => {
         createLikesData(json)
@@ -19,29 +21,6 @@ function App() {
       }, 700))
   }
 
-//  const usersLikes = [
-//   {
-//     id: user.id,
-//     like: 30,
-//     dislike: 30
-//   },
-//   {
-//     id: user.id,
-//     like: 30,
-//     dislike: 30
-//   },
-//   {
-//     id: user.id,
-//     like: 30,
-//     dislike: 30
-//   },
-//   {
-//     id: user.id,
-//     like: 30, 
-//     dislike: 30
-//   },
-
-//  ]
   const createLikesData = (users) => {
     users.map(user => {
       likes.push({
@@ -60,27 +39,50 @@ function App() {
     })
    return likes
   }
+  const handleDislikes = (e) =>{
+    likes.forEach((dislike) =>{
+      if (+dislike.id === +e.target.value){
+        dislike.dislike++
+      }
+    })
+    return likes;
+  }
 
-  useEffect(() => {
+  useEffect( () => {
     getData()
   }, [query])
 
   return (
     <div className="App">
+      <Navigation />
+      <div className="table-grid">
       {users ? users.map((user, index) =>
         <div key={user.name} className="users-grid">
+          <div>{user.id}</div>
           <div>{user.name}</div>
           <div>{user.phone}</div>
           <div>{user.email}</div>
           <div>
-            <button onClick={handleLikes} value={likes[index].id}>
+            <button className = "like-btn" onClick={handleLikes} value={likes[index].id}>
               Like {likes[index].like}
             </button>
           </div>
+          <div>
+            <button className = "like-btn" onClick = {handleDislikes} value = {likes[index].id}>
+              Dislike {likes[index].dislike}
+            </button>
+          </div>
+          <button className = "like-btn">
+            Edit user
+          </button>
         </div>
+
       ) : <Loader />}
-      <div className="pagination">
-        {[1, 2, 3].map(page => <div className="pagination-item" onClick={() => { setQuery(page) }} key={page}>{page}</div>)}
+      </div>
+      <div className="pagination mt-5">
+        {[1, 2, 3].map(page => <div
+         className={(query === page ? 'active ' : '') + `pagination-item`}
+         onClick={() => { setQuery(page) }} key={page}>{page}</div>)}
       </div>
     </div>
   );

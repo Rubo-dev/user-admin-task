@@ -13,17 +13,41 @@
   background-color: #2d2d2d;
   padding: .3em;
   color: #fff;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   transition: .3s;
 }
 .pagination-item:hover{
   cursor:pointer;
   box-shadow: 0px 0px 0px 3px #078f7088;
 }
+.pagination-item.active{
+  box-shadow: 0px 0px 0px 3px #078f7088;
+}
+.table-grid{
+  display: grid;
+  grid-template-rows: repeat(5,1fr);
+}
 .users-grid{
   display: grid;
-  grid-template-columns: repeat(5,200px);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 2em;
+  grid-template-columns:minmax(50px,100px) repeat(5,1fr);
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #2d2d2d;
+}
+.users-grid div{
+  border-right: 2px solid #2d2d2d;
+  padding: .3em;
+}
+.like-btn{
+  background-color:#2d2d2d;
+  transition: .3s;
+  color: #fff;
+  padding: .3em .5em;
+  border-radius: 15px;
+  border: none;
+}
+.like-btn:hover{
+  box-shadow: 0px 0px 0px 3px #078f7088;
 }
