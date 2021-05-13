@@ -1,14 +1,12 @@
-import React,{useState} from 'react'
+import React from 'react'
 
-const Likes = () => {
-    const [likes,setLikes] = useState(Math.floor(Math.random() * (100 - 0) + 0));
+const Likes = (props) => {
    
     return (
         <div className = "likes">
-            <span>
-                <button onClick = {() => setLikes(likes+1)}>Like</button>
-                <span>{likes}</span>
-            </span>
+            <button onClick={props.handleLikes} className="like-btn" value={props.value}>
+                Like {props.like}
+            </button>
         </div>
     )
 }
