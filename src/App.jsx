@@ -19,7 +19,29 @@ function App() {
       }, 700))
   }
 
+//  const usersLikes = [
+//   {
+//     id: user.id,
+//     like: 30,
+//     dislike: 30
+//   },
+//   {
+//     id: user.id,
+//     like: 30,
+//     dislike: 30
+//   },
+//   {
+//     id: user.id,
+//     like: 30,
+//     dislike: 30
+//   },
+//   {
+//     id: user.id,
+//     like: 30, 
+//     dislike: 30
+//   },
 
+//  ]
   const createLikesData = (users) => {
     users.map(user => {
       likes.push({
