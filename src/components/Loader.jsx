@@ -1,9 +1,11 @@
 import React from 'react';
-import '../assets/loader.css'
+import '../assets/styles/loader.css'
 
 const Loader = () =>{
     return(
-        <div className="lds-dual-ring"></div>
+        <div className="loader">
+            <div className="lds-dual-ring"></div>
+        </div>
     )
 }
 export default Loader;
