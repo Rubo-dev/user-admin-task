@@ -28,7 +28,7 @@ const App = () => {
           localStorage.setItem(`users${query}`, JSON.stringify(json))
         }
         setUsers(JSON.parse(localStorage.getItem(`users${query}`)))
-      }, 700))
+      }, 60700))
   }
   const handleLikes = (e) => {
 
