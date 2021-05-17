@@ -5,9 +5,13 @@ import Navigation from './components/Navigation';
 import Likes from './components/Likes';
 import Dislikes from './components/Dislikes';
 import { Link, Redirect } from 'react-router-dom';
+import EditModal from './components/Modal';
+import edit from './assets/images/edit.png'
+
 const App = () => {
   const [users, setUsers] = useState(null);
   const [query, setQuery] = useState(0);
+  const [show, setShow] = useState(false);
   const getData = () => {
     setUsers(null)
     fetch(`https://jsonplaceholder.typicode.com/users?_start=${query}&_limit=5`)
@@ -31,10 +35,19 @@ const App = () => {
       }, 700))
   }
   const handleLikes = (e) => {
-
     setUsers(users.filter((user, i, arr) => {
       if (+user.id === +JSON.parse(e.target.value).id) {
         arr[i].like++
+      }
+      return (arr)
+    }))
+    localStorage.setItem(`users${query}`, JSON.stringify(users))
+  }
+
+  const handleName = (e) => {
+    setUsers(users.filter((user, i, arr) => {
+      if (user.id === i) {
+        user.name = e.target.value;
       }
       return (arr)
     }))
@@ -57,39 +70,51 @@ const App = () => {
     <div className="App">
       <Redirect to={`/page-1`} />
       <Navigation />
-      <div className = "container my-4">
+      <div className="container my-4">
         <h4>
           Active users(5)
         </h4>
       </div>
       <div className="table-grid mt-1 container">
         <div className="title-grid">
-          <div className = "font-weight-bold">Image</div>
-          <div className = "font-weight-bold">Full Name</div>
-          <div className = "font-weight-bold">Phone</div>
-          <div className = "font-weight-bold">Email</div>
-          <div className = "font-weight-bold">Likes</div>
-          <div className = "font-weight-bold">Dislikes</div>
+          <div className="font-weight-bold">Image</div>
+          <div className="font-weight-bold">Full Name</div>
+          <div className="font-weight-bold">Phone</div>
+          <div className="font-weight-bold">Email</div>
+          <div className="font-weight-bold">Likes</div>
+          <div className="font-weight-bold">Dislikes</div>
         </div>
         {users ? users.map((user, index) =>
           <div key={user.name} className="users-grid">
-            <div className ="user-image font-weight-normal">
-              {user.name.split(' ')[0].slice(0,1).toUpperCase()}
-              {user.name.split(' ')[1].slice(0,1).toUpperCase()}
-              </div>
-            <div className = "user user-name font-weight-normal">{user.name}</div>
-            <div className = "font-weight-normal">{user.phone}</div>
-            <div className = "font-weight-normal">{user.email}</div>
-              <Likes handleLikes={handleLikes} className="like-btn" value={JSON.stringify(user)} like={user.like} />
-              <Dislikes handleDislike={handleDislike} className="like-btn" value={JSON.stringify(user)} dislike={user.dislike} />
+            <div className="user-item user-image font-weight-normal">
+              {user.name.split(' ')[0].slice(0, 1).toUpperCase()} */}
+              {user.name.split(' ')[1].slice(0, 1).toUpperCase()}
+            </div>
+            <div className="user-item user user-name font-weight-normal">{user.name}</div>
+            <div className="user-item font-weight-normal">{user.phone}</div>
+            <div className="user-item font-weight-normal">{user.email}</div>
+            <Likes handleLikes={handleLikes} className="like-btn" value={JSON.stringify(user)} like={user.like} />
+            <Dislikes handleDislike={handleDislike} className="like-btn" value={JSON.stringify(user)} dislike={user.dislike} />
+            <button className="edit-btn" onClick={() => { setShow(true) }} >
+              <img src={edit} alt="" />
+            </button>
+            <EditModal
+              index={index}
+              userName={user.name}
+              userMail={user.email}
+              userPhone={user.phone}
+              onClose={() => { setShow(false) }}
+              show={show}
+              handleName={handleName}
+            />
           </div>
         ) : <Loader />}
       </div>
       <div className="pagination mt-5">
         {[{ name: '1', value: 0 }, { name: '2', value: 5 }].map(page =>
-         <Link to={`/page-${page.name}`}>
-           <div className={(query === page.value ? 'active ' : '') + `pagination-item`} onClick={() => { setQuery(page.value) }} key={`/page-${page.name}`}>
-             {page.name}
+          <Link to={`/page-${page.name}`}>
+            <div className={(query === page.value ? 'active ' : '') + `pagination-item`} onClick={() => { setQuery(page.value) }} key={`/page-${page.name}`}>
+              {page.name}
             </div>
           </Link>)}
       </div>

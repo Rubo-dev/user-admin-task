@@ -36,13 +36,13 @@
 }
 .table-grid{
   display: grid;
-  grid-template-rows: repeat(5,1fr); 
+  grid-template-rows: repeat(6,1fr); 
   font-family:Roboto-Regular;
   gap: 2em;
 }
 .users-grid,.title-grid{
   display: grid;
-  grid-template-columns:minmax(50px,100px) repeat(5,1fr);
+  grid-template-columns:minmax(50px,100px) repeat(6,1fr);
   justify-content: start;
   align-items: center;
   text-align: center;
@@ -50,14 +50,20 @@
   border-radius: 15px;
 }
 
-.users-grid div{
+.users-grid .user-item {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: .3em;
   height: 80px;
 }
-.user-name{
+.edit-btn{
+  display: flex;
+  justify-content: center;
+  background-color: unset;
+  border: none;
+  align-items: center;
+  margin: 0 auto;
 }
 .likes{
   border-right: 0;

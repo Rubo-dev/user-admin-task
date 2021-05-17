@@ -3,7 +3,7 @@ import React from 'react'
 const Likes = (props) => {
    
     return (
-        <div className = "likes">
+        <div className = "user-item likes">
             <button onClick={props.handleLikes} className="like-btn btn btn-primary" value={props.value}>
                 Like {props.like}
             </button>
