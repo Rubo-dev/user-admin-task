@@ -42,7 +42,7 @@
 }
 .users-grid,.title-grid{
   display: grid;
-  grid-template-columns:minmax(50px,100px) repeat(6,1fr);
+  grid-template-columns:minmax(50px,100px) repeat(5,1fr) minmax(50px,100px);
   justify-content: start;
   align-items: center;
   text-align: center;
